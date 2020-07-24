@@ -1,26 +1,4 @@
-// function is_touch_device() {  
-//   try {  
-//     document.createEvent("TouchEvent");  
-//     return true;  
-//   } catch (e) {  
-//     return false;  
-//   }  
-// }
 
-// console.log(is_touch_device());
-
-// function chooseElement(){
-// var reply=is_touch_device();
-// if(reply== false){
-//     document.getElementByClassName('companies').style.display='none';
-//         document.getElementByClassName('autodesk').style.display='block';
-//         document.getElementByClassName('wedabout').style.display='block';
-//         document.getElementByClassName('y4w').style.display='block';
-//         document.getElementByClassName('gonoise').style.display='block';
-// document.getElementByClassName('default').style.display='none';
-// document.getElementByClassName('info').style.margin-top='0px';
-// }
-// }
 
 $(function() {
 

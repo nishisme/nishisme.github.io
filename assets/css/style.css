@@ -689,6 +689,7 @@ a.icon-up-bg:hover {color: #212121;}
   background-color: rgb(84,83,87);
   color: white;
   transform: rotateY(180deg);
+  padding-top:20%;
 } 
  .overlap{
     width: 200px;
