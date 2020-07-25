@@ -588,6 +588,10 @@
     left: 50px;
     opacity: 1;
 	}
+	.info{
+		margin-left:auto;
+		margin-right: auto;
+	}
 
 }
 
