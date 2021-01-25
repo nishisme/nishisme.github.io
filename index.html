@@ -580,29 +580,24 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <!-- add popup for chat -->
-        <script type="text/javascript">
-            var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || 
-            {widgetcode:"9645d2caf0776760d8a949a89b4a1bfc94fe66347aadf8c6e22f8ecbddf2f6a3", values:{},ready:function(){}};
-            var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;
-            s.src="https://salesiq.zoho.in/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);d.write("<div id='zsiqwidget'></div>");
-        </script>
-        <!-- async call -->
-        <script type="text/javascript">
-            var $zoho = $zoho || {}; $zoho.salesiq = $zoho.salesiq ||
-            {        mode: "async", widgetcode: "WIDGETCODE", values: {}, ready: function () { }
+   <script>
+// This will initiate Upscope connection. It's important it is added to all pages, even when the user is not logged in.
+(function(w, u, d){var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};var l = function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://code.upscope.io/FfQSAfSqtV.js';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(typeof u!=="function"){w.Upscope=i;l();}})(window, window.Upscope, document);
 
-            };
-            var d = document; s = d.createElement("script"); s.type = "text/javascript"; s.id = "zsiqscript"; s.defer = true; s.src = "https://salesiq.zoho.com/widget"; t = d.getElementsByTagName("script")[0]; t.parentNode.insertBefore(s, t); d.write("<div id='zsiqwidget'></div>");
-        </script>
-        <!-- live chat -->
-        <script type="text/javascript">
-            var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode:"9645d2caf0776760d8a949a89b4a1bfc94fe66347aadf8c6e22f8ecbddf2f6a3", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.in/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);d.write("<div id='zsiqwidget'></div>");
-        </script>
-        <!-- vistior tracking -->
-        <script type="text/javascript">
-            var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode:"9645d2caf0776760d8a949a89b4a1bfc94fe66347aadf8c6e22f8ecbddf2f6a3", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.in/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);d.write("<div id='zsiqwidget'></div>");
-        </script>
+Upscope('init');
+</script>
+
+<script>
+// If the user is logged in, optionally identify them with the following method.
+// You can call Upscope('updateConnection', {}); at any time.
+Upscope('updateConnection', {
+  // Set the user ID below. If you don't have one, set to undefined.
+  uniqueId: "FfQSAfSqtV",
+
+  // Set the user name or email below (e.g. ["John Smith", "john.smith@acme.com"]).
+  identities: ["Nishtha Saxena", "nishtha1.saxena@tataaig.com"]
+});
+</script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
