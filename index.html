@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESM Console – Home</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <div id="app-header"></div>
+    <div class="container">
+        <h1 style="margin:6px 0 14px">Welcome</h1>
+        <p class="muted">Select a team and pick a module to continue.</p>
+        <div class="grid-tiles">
+            <div class="tile" onclick="location.href='tickets.html'">
+                <h3>Raise a Ticket</h3>
+                <p>Create a new request.</p>
+            </div>
+            <div class="tile" onclick="location.href='tickets.html'">
+                <h3>My Tickets</h3>
+                <p>Track your requests.</p>
+            </div>
+            <div class="tile" onclick="location.href='tickets.html'">
+                <h3>View All Tickets</h3>
+                <p>List and filter tickets.</p>
+            </div>
+            <div class="tile" onclick="location.href='team.html'">
+                <h3>Manage Team(s)</h3>
+                <p>Manage teams, members & owners.</p>
+            </div>
+            <div class="tile" data-role="Admin, Functional Head, Team Manager"
+                onclick="location.href='formbuilder.html'">
+                <h3>Ticket Form Builder</h3>
+                <p>Drag fields to compose forms.</p>
+            </div>
+            <div class="tile" data-role="Admin, Functional Head, Team Manager" onclick="location.href='workflow.html'">
+                <h3>Workflow Builder</h3>
+                <p>Define stages & owners.</p>
+            </div>
+            <div class="tile" data-role="Admin" onclick="location.href='monitoring.html'">
+                <h3>Monitoring</h3>
+                <p>Team-wise ticket trends & SLAs (Admin).</p>
+            </div>
+            <div class="tile" onclick="location.href='faq.html'">
+                <h3>FAQs</h3>
+                <p>Common answers and guides.</p>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/app.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', () => { __esm.renderChrome('index.html'); __esm.syncRoleVisibility(); });</script>
+</body>
+
+</html>

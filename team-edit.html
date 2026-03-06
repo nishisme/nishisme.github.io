@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Edit Team – ESM Console</title><link rel="stylesheet" href="assets/css/style.css"/></head><body><div id="app-header"></div><div class="shell"><div id="app-sidebar"></div><main class="main">
+<h2>Edit Team</h2>
+<div id="team-edit-wrap" class="card">
+  <div class="form-row"><input id="t-name" class="input" placeholder="Team name"/><input id="t-desc" class="input" placeholder="Team description"/></div>
+  <div class="form-row"><select id="t-primary" class="select"></select><select id="t-secondary" class="select"></select></div>
+  <h3>Members</h3>
+  <div id="members" style="margin-bottom:10px"></div>
+  <div class="form-row"><input id="add-member" class="input" placeholder="Type member name(s), comma separated"/><button id="add-member-btn" class="button primary" type="button">Add Member(s)</button></div>
+  <div><button id="save-team-btn" class="button primary">Save</button> <button class="button" onclick="history.back()">Cancel</button></div>
+</div>
+</main></div><script src="assets/js/app.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{__esm.renderChrome('team-edit.html');__esm.syncRoleVisibility();__esm.renderTeamsTable&&__esm.renderTeamsTable();__esm.bindTeamEdit&&__esm.bindTeamEdit();__esm.renderMonitoring&&__esm.renderMonitoring();});</script></body></html>

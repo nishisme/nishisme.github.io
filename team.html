@@ -1,0 +1,6 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Teams – ESM Console</title><link rel="stylesheet" href="assets/css/style.css"/></head><body><div id="app-header"></div><div class="shell"><div id="app-sidebar"></div><main class="main">
+<h2>Manage Teams</h2>
+<p class="muted">This section is for managing teams only (names, descriptions, owners, members). Ticket statistics are available under <strong>Monitoring</strong> (Admin).</p>
+<div class="searchbar"><input id="team-search" class="input" placeholder="Search by team or owner" oninput="__esm.renderTeamsTable()"/> <button class="button" onclick="__esm.renderTeamsTable()">Search</button></div>
+<div class="card"><table class="table"><thead><tr><th>Team Name</th><th>Description</th><th>Members</th><th>Primary Owner</th><th>Secondary Owner</th><th>Action</th></tr></thead><tbody id="teams-tbody"></tbody></table></div>
+</main></div><script src="assets/js/app.js"></script><script>document.addEventListener('DOMContentLoaded',()=>{__esm.renderChrome('team.html');__esm.syncRoleVisibility();__esm.renderTeamsTable&&__esm.renderTeamsTable();__esm.bindTeamEdit&&__esm.bindTeamEdit();__esm.renderMonitoring&&__esm.renderMonitoring();});</script></body></html>

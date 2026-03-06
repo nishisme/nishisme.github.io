@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monitoring – ESM Console</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <div id="app-header"></div>
+    <div class="shell">
+        <div id="app-sidebar"></div>
+        <main class="main">
+            <h2>Monitoring (Admin)</h2>
+            <p class="muted">Team-wise ticket trends and overview (illustrative demo charts).</p>
+            <div class="cards" style="margin-bottom:16px" data-role="Admin">
+                <div class="card">
+                    <div class="kpi">42</div>
+                    <div class="kpi-label">Open Tickets</div>
+                </div>
+                <div class="card">
+                    <div class="kpi">7</div>
+                    <div class="kpi-label">Breached SLAs</div>
+                </div>
+                <div class="card">
+                    <div class="kpi">4.7h</div>
+                    <div class="kpi-label">Avg. First Response</div>
+                </div>
+            </div>
+            <div class="card" style="margin-bottom:16px" data-role="Admin">
+                <h3>Workload</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Assignee</th>
+                            <th>Open</th>
+                            <th>In Progress</th>
+                            <th>Blocked</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Team A</td>
+                            <td>12</td>
+                            <td>6</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Team B</td>
+                            <td>9</td>
+                            <td>4</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Unassigned</td>
+                            <td>21</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="cards" style="margin-bottom:16px">
+                <div class="card">
+                    <div class="kpi">93%</div>
+                    <div class="kpi-label">SLA Compliance</div>
+                </div>
+                <div class="card">
+                    <div class="kpi">18</div>
+                    <div class="kpi-label">Critical Tickets</div>
+                </div>
+                <div class="card">
+                    <div class="kpi">3.2d</div>
+                    <div class="kpi-label">Avg. Resolution</div>
+                </div>
+            </div>
+            <div class="cards">
+                <div class="canvas-wrap">
+                    <h3>Team-wise Open vs Closed (Bar)</h3><canvas id="bar"></canvas>
+                </div>
+                <div class="canvas-wrap">
+                    <h3>Overall Open vs Closed (Pie)</h3><canvas id="pie"></canvas>
+                </div>
+                <div class="card">
+                    <h3>Notes</h3>
+                    <p class="muted">Charts are placeholders for visualization only (no live data feed).</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="assets/js/app.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', () => { __esm.renderChrome('monitoring.html'); __esm.syncRoleVisibility(); __esm.renderTeamsTable && __esm.renderTeamsTable(); __esm.bindTeamEdit && __esm.bindTeamEdit(); __esm.renderMonitoring && __esm.renderMonitoring(); });</script>
+</body>
+
+</html>

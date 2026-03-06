@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticket Detail – ESM Console</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div id="app-header"></div>
+  <div class="shell">
+    <div id="app-sidebar"></div>
+    <main class="main">
+      
+<h2>Ticket: INC-1024</h2>
+<div class="tabs">
+  <div class="tab active" data-tab="details">Details</div>
+  <div class="tab" data-tab="comments">Comments</div>
+  <div class="tab" data-tab="workflow">Workflow</div>
+  <div class="tab" data-tab="history">Assignment History</div>
+</div>
+<div class="tabpanes">
+  <div class="pane" id="pane-details">
+    <div class="form-row">
+      <input class="input" value="VPN access request" />
+      <select class="select"><option>Open</option><option>In Progress</option><option>Resolved</option></select>
+    </div>
+    <div class="form-row">
+      <select class="select"><option>Medium</option><option>Low</option><option>High</option><option>Critical</option></select>
+      <select class="select"><option>IT Support</option><option>Network</option><option>Security</option></select>
+    </div>
+    <textarea>Need VPN access for remote work.</textarea>
+    <div style="margin-top:12px" class="chips">
+      <span class="chip">Requester: Nishtha</span>
+      <span class="chip">Assignee: Unassigned</span>
+      <span class="chip">SLA: 8h</span>
+    </div>
+    <div style="margin-top:12px">
+      <button class="button primary">Save</button>
+      <button class="button">Assign</button>
+    </div>
+  </div>
+  
+  <div class="pane" id="pane-comments" style="display:none">
+    <div class="card">
+      <div class="form-row">
+        <input class="input" placeholder="Add a comment"/>
+        <button class="button primary">Comment</button>
+      </div>
+      <div>
+        <p><strong>You</strong>: Please provide business justification. <span class="chip">Just now</span></p>
+        <p><strong>Requester</strong>: Need access for client site. <span class="chip">5m ago</span></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="pane" id="pane-workflow" style="display:none">
+    <div class="flow" id="flow">
+      <div class="stage">New <select class="select"><option>Requester</option><option>System</option></select></div>
+      <div class="arrow">➡</div>
+      <div class="stage">Manager Approval <select class="select"><option>Team Manager</option><option>Functional Head</option></select></div>
+      <div class="arrow">➡</div>
+      <div class="stage">IT Provisioning <select class="select"><option>IT Support</option><option>Network</option></select></div>
+      <div class="arrow">➡</div>
+      <div class="stage">Done <select class="select"><option>System</option></select></div>
+    </div>
+    <div style="margin-top:12px" class="chips">
+      <button class="button">+ Add Stage</button>
+      <button class="button">Save Workflow</button>
+    </div>
+  </div>
+  
+  <div class="pane" id="pane-history" style="display:none">
+    <table class="table">
+      <thead><tr><th>When</th><th>Action</th><th>By</th></tr></thead>
+      <tbody>
+        <tr><td>Today</td><td>Ticket created</td><td>Requester</td></tr>
+        <tr><td>Today</td><td>SLA applied (8h)</td><td>System</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  document.addEventListener('click', (e)=>{
+    if(e.target.classList.contains('tab')){
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      e.target.classList.add('active');
+      const name = e.target.getAttribute('data-tab');
+      ['details','comments','workflow','history'].forEach(k=>{
+        document.getElementById('pane-'+k).style.display = (k===name)?'block':'none';
+      })
+    }
+  })
+</script>
+
+    </main>
+  </div>
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      __esm.renderChrome('ticket-detail.html');
+      __esm.syncRoleVisibility();
+    });
+  </script>
+</body>
+</html>
