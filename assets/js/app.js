@@ -38,7 +38,8 @@
       {href:'formbuilder.html',label:'Ticket Form Builder',roles:['Admin','Functional Head','Team Manager']},
       {href:'workflow.html',label:'Workflow Builder',roles:['Admin','Functional Head','Team Manager']},
       {href:'team.html',label:'Teams'},
-      {href:'monitoring.html',label:'Monitoring',roles:['Admin']}
+      {href:'bulk.html',label:'Bulk Action'},
+      {href:'monitoring.html',label:'Monitoring',roles:['Admin','Functional Head','Team Manager']}
     ];
     const visible=items.filter(it=>!it.roles||it.roles.includes(state.role));
     sidebar.innerHTML = `<div class="sidebar"><div class="nav-group"><h4>Navigate</h4>${visible.map(it=>`<a class="nav-item ${active===it.href?'active':''}" href="${it.href}">${it.label}</a>`).join('')}</div></div>`;

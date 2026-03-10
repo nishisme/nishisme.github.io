@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulk Actions</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+    .shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+    .sidebar{background:#0f172a14;padding:14px}
+    .main{padding:20px}
+    .card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+    table{width:100%;border-collapse:collapse;margin-top:10px}
+    th,td{border-bottom:1px solid #e2e8f0;padding:8px;text-align:left;font-size:14px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chip{border:1px solid #e2e8f0;border-radius:999px;padding:4px 10px;font-size:12px;background:#fff}
+    .button{padding:8px 12px;border:1px solid #e2e8f0;border-radius:8px;background:#fff;cursor:pointer}
+    .button.primary{background:#2563eb;color:#fff;border-color:#2563eb}
+    .input,.select{padding:8px 10px;border:1px solid #e2e8f0;border-radius:8px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  </style>
+</head>
+<body>
+<div id='app-header'></div>
+<div class='shell'>
+  <div id='app-sidebar'></div>
+  <main class='main'>
+    <h2>Bulk Upload & Bulk Actions (All Users)</h2>
+    <div class='card'>
+      <h3>Bulk Upload CSV</h3>
+      <p style='color:#475569'>Upload a CSV with columns: <b>ticketId,status,assignee,comment</b>. We'll preview before applying.</p>
+      <div class='grid2'>
+        <input id='csvfile' type='file' accept='.csv' class='input'>
+        <div>
+          <select id='bulkStatus' class='select'>
+            <option value=''>— Set status (optional) —</option>
+            <option>Open</option>
+            <option>In Progress</option>
+            <option>Pending</option>
+            <option>Resolved</option>
+            <option>Closed</option>
+          </select>
+          <button class='button' id='applyStatusBtn'>Apply status to selected</button>
+        </div>
+      </div>
+      <div class='chips'>
+        <button class='button primary' id='loadCsv'>Preview CSV</button>
+        <button class='button' id='clearTable'>Clear</button>
+        <button class='button' id='applyAll'>Apply all rows</button>
+      </div>
+      <div id='preview' class='card' style='margin-top:12px'>
+        <h4>Preview</h4>
+        <table id='tbl'>
+          <thead><tr><th><input type='checkbox' id='chkAll'></th><th>ticketId</th><th>status</th><th>assignee</th><th>comment</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class='card' style='margin-top:12px'>
+        <h4>Bulk Action Log (local)</h4>
+        <div id='log' style='font-family:monospace;font-size:12px;white-space:pre-wrap'></div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src='assets/js/app.js'></script>
+
+  <script>document.addEventListener('DOMContentLoaded', () => { __esm.renderChrome('bulk.html'); __esm.syncRoleVisibility(); __esm.renderTeamsTable && __esm.renderTeamsTable(); __esm.bindTeamEdit && __esm.bindTeamEdit(); __esm.renderMonitoring && __esm.renderMonitoring(); });</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){ __esm.renderChrome('bulk.html'); init(); });
+
+  function init(){
+    document.getElementById('loadCsv').onclick = handleLoad;
+    document.getElementById('clearTable').onclick = function(){document.querySelector('#tbl tbody').innerHTML=''};
+    document.getElementById('applyAll').onclick = function(){
+      var ids = Array.from(document.querySelectorAll('#tbl tbody tr')).map(function(tr){return tr.dataset.idx});
+      applyChanges(ids);
+    };
+    document.getElementById('applyStatusBtn').onclick = applyBulkStatusToSelected;
+    document.getElementById('chkAll').onchange = function(e){
+      document.querySelectorAll("#tbl tbody input[type='checkbox']").forEach(function(ch){ ch.checked=e.target.checked; });
+    };
+    refreshLog();
+  }
+
+  function handleLoad(){
+    var f=document.getElementById('csvfile').files[0];
+    if(!f){ alert('Choose a CSV file first'); return; }
+    var reader=new FileReader();
+    reader.onload = function(e){ parseCsv(e.target.result); };
+    reader.readAsText(f);
+  }
+
+  function parseCsv(text){
+    var rows=text.split(/\r?\n/).filter(function(r){return r.trim().length>0});
+    if(rows.length===0){ return; }
+    var header=rows[0].split(',').map(function(h){return h.trim().toLowerCase()});
+    var idxId=header.indexOf('ticketid');
+    var idxStatus=header.indexOf('status');
+    var idxAssignee=header.indexOf('assignee');
+    var idxComment=header.indexOf('comment');
+    var tbody=document.querySelector('#tbl tbody');
+    tbody.innerHTML='';
+    rows.slice(1).forEach(function(r,i){
+      var cols=r.split(',');
+      var tr=document.createElement('tr'); tr.dataset.idx=i;
+      tr.innerHTML = "<td><input type='checkbox'></td>"+
+        "<td>"+escapeHtml(cols[idxId]||'')+"</td>"+
+        "<td contenteditable='true'>"+escapeHtml(cols[idxStatus]||'')+"</td>"+
+        "<td contenteditable='true'>"+escapeHtml(cols[idxAssignee]||'')+"</td>"+
+        "<td contenteditable='true'>"+escapeHtml(cols[idxComment]||'')+"</td>";
+      tbody.appendChild(tr);
+    });
+  }
+
+  function applyBulkStatusToSelected(){
+    var status=document.getElementById('bulkStatus').value;
+    if(!status){ alert('Select a status to apply'); return; }
+    document.querySelectorAll('#tbl tbody tr').forEach(function(tr){
+      var chk=tr.querySelector("input[type='checkbox']");
+      if(chk && chk.checked){ tr.children[2].textContent=status; }
+    });
+  }
+
+  function gatherRows(ids){
+    var rows=Array.from(document.querySelectorAll('#tbl tbody tr')).filter(function(tr){return !ids || ids.includes(tr.dataset.idx)});
+    return rows.map(function(tr){
+      return {
+        ticketId: tr.children[1].textContent.trim(),
+        status: tr.children[2].textContent.trim(),
+        assignee: tr.children[3].textContent.trim(),
+        comment: tr.children[4].textContent.trim()
+      };
+    });
+  }
+
+  function applyChanges(idList){
+    var items=gatherRows(idList);
+    if(items.length===0){ alert('Nothing to apply'); return; }
+    var log = JSON.parse(localStorage.getItem('bulkOpsLog')||'[]');
+    var when = new Date().toISOString();
+    log.push({when:when, count: items.length, actions: items});
+    localStorage.setItem('bulkOpsLog', JSON.stringify(log));
+    alert('Applied '+items.length+' row(s) (logged locally).');
+    refreshLog();
+  }
+
+  function refreshLog(){
+    var log = JSON.parse(localStorage.getItem('bulkOpsLog')||'[]');
+    var el=document.getElementById('log');
+    el.textContent = JSON.stringify(log, null, 2);
+  }
+
+  function escapeHtml(s){
+    return String(s||'').replace(/[&<>"']/g, function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;","":"&quot;","'":"&#39;"}[c])});
+  }
+</script>
+</body>
+</html>
